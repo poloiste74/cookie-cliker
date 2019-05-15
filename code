@@ -1,0 +1,75 @@
+from tkinter import *
+
+cookies_count = 0
+
+def cookies_clicks_count():
+    global cookies_count
+    cookies_count += 1
+    if cookies_count > 250:
+        cookies_count += 1
+    if cookies_count > 500:
+        cookies_count += 1
+    if cookies_count > 1000:
+        cookies_count += 1
+    if cookies_count > 1750:
+        cookies_count += 1
+    if cookies_count > 2500:
+        cookies_count += 1
+    if cookies_count > 3500:
+        cookies_count += 1
+    label_counter.config(text=cookies_count)
+
+
+def bonus_500():
+    global  cookies_count
+    cookies_count +=500
+    label_counter.config(text=cookies_count)
+
+
+def bonus_1000():
+    global  cookies_count
+    cookies_count +=1000
+    label_counter.config(text=cookies_count)
+
+
+# window with a cookie in the middle
+window = Tk()
+window.title("Cookie clicker")
+window.geometry("1080x720")
+window.minsize(720, 360)
+window.iconbitmap("image cookie.ico")
+window.config(bg='#21F0DA')
+
+frame = Frame(window, bg='#21F0DA')
+frame.pack(expand=YES)
+
+
+# picture
+width = 300
+height = 300
+image = PhotoImage(file="image cookie.png").zoom(32).subsample(64)
+
+
+# cookie counter
+label_counter = Label(window, text="0", font=("Courrier", 30), bg="#dee5dc")
+label_counter.pack()
+
+
+# button
+click_button = Button(frame, image=image, bg='#21F0DA', relief=SUNKEN, command=cookies_clicks_count)
+click_button.pack()
+
+
+# menu bar
+menu_bar = Menu(window)
+
+# shop
+file_menu = Menu(menu_bar, tearoff=0)
+menu_bar.add_cascade(label="Boutique", menu=file_menu)
+menu_bar.add_command(label="500 cookies pour 5€", command=bonus_500)
+menu_bar.add_command(label="1000 cookies pour 10€", command=bonus_1000)
+window.config(menu=menu_bar)
+
+# show
+frame.pack(expand=YES)
+window.mainloop()
